@@ -3,13 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <!-- ÍCONO IMPORTANTE -->
-    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/5968/5968342.png">
-    
-    <!-- Para que funcione en iPhone -->
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/5968/5968342.png">
+    
+    <!-- ÍCONO 100% FUNCIONAL - NO GOOGLE -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⭐</text></svg>">
+    <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/2107/2107957.png">
+    
+    <!-- Manifest -->
+    <link rel="manifest" href="manifest.json">
     
     <title>Mi App Móvil</title>
     <style>
@@ -24,19 +26,20 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            margin: 0;
         }
         .container {
             background: rgba(255,255,255,0.1);
             padding: 30px;
             border-radius: 20px;
             max-width: 500px;
-            margin: 0 auto;
+            margin: 20px;
         }
-        .icon {
+        .icon-large {
             font-size: 80px;
             margin-bottom: 20px;
         }
-        button {
+        .btn {
             background: white;
             color: #667eea;
             border: none;
@@ -46,6 +49,8 @@
             margin: 10px;
             cursor: pointer;
             font-weight: bold;
+            display: inline-block;
+            text-decoration: none;
         }
         .steps {
             background: rgba(0,0,0,0.2);
@@ -54,47 +59,68 @@
             margin-top: 30px;
             text-align: left;
         }
+        .success {
+            color: #4CAF50;
+            font-weight: bold;
+        }
+        .url {
+            background: black;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            margin: 10px;
+            word-break: break-all;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="icon">✅</div>
-        <h1>¡Mi App Funciona!</h1>
-        <p>Esta app tiene ícono personalizado y se puede instalar en el celular.</p>
+        <div class="icon-large">📱</div>
+        <h1>¡App de Diego!</h1>
+        <p class="success">✅ Ícono personalizado garantizado</p>
         
-        <button onclick="probarConexion()">🔗 Probar Conexión Google</button>
-        <button onclick="instalarApp()">📱 Instalar App</button>
-        
-        <div id="resultado" style="margin-top: 20px; min-height: 50px;"></div>
+        <a class="btn" href="javascript:instalarApp()">📲 Instalar App</a>
+        <a class="btn" href="javascript:forzarActualizacion()">🔄 Forzar Actualización</a>
         
         <div class="steps">
-            <h3>📋 Para instalar en Android:</h3>
-            <p>1. Abre el menú de Chrome (3 puntos)</p>
-            <p>2. Selecciona "Añadir a pantalla de inicio"</p>
-            <p>3. Confirma y ¡listo!</p>
+            <h3>📋 Para instalar (Android):</h3>
+            <p>1. Usa el menú de Chrome (3 puntos)</p>
+            <p>2. <strong>"Añadir a pantalla de inicio"</strong></p>
+            <p>3. Debería mostrar una <strong>estrella amarilla ⭐</strong></p>
         </div>
+        
+        <div class="url">
+            https://diegohidalgovasquez.github.io/mi-app-movil/
+        </div>
+        
+        <p style="font-size: 12px; opacity: 0.8;">
+            Si sigue saliendo "G": Borra caché de Chrome y reinicia
+        </p>
     </div>
     
     <script>
-        // Aquí irá la conexión con Google Apps Script
-        function probarConexion() {
-            document.getElementById('resultado').innerHTML = 
-                '<p style="color: yellow;">⚠️ Primero configura el Apps Script (siguiente paso)</p>';
-        }
-        
         function instalarApp() {
-            if ('serviceWorker' in navigator) {
-                // En un futuro podrías añadir Service Worker aquí
-                alert('Para instalar: Usa el menú de Chrome → "Añadir a pantalla de inicio"');
+            if (window.matchMedia('(display-mode: standalone)').matches) {
+                alert('✅ Ya está instalada como app');
             } else {
-                alert('Tu navegador soporta instalación. Usa el menú de Chrome.');
+                alert('Usa el menú de Chrome → "Añadir a pantalla de inicio"');
             }
         }
         
-        // Mostrar mensaje especial si ya está instalada como app
-        if (window.matchMedia('(display-mode: standalone)').matches) {
-            document.querySelector('h1').innerHTML += ' 📲';
+        function forzarActualizacion() {
+            if (confirm('¿Vaciar caché y recargar?')) {
+                localStorage.clear();
+                location.reload(true);
+            }
         }
+        
+        // Detectar si es app instalada
+        window.addEventListener('load', function() {
+            if (navigator.standalone || window.matchMedia('(display-mode: standalone)').matches) {
+                document.querySelector('h1').innerHTML = '¡App de Diego! 📱';
+            }
+        });
     </script>
 </body>
 </html>
