@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- ÍCONO IMPORTANTE -->
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/5968/5968342.png">
+    
+    <!-- Para que funcione en iPhone -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/5968/5968342.png">
+    
+    <title>Mi App Móvil</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 20px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+        }
+        button {
+            background: white;
+            color: #667eea;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 50px;
+            margin: 10px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .steps {
+            background: rgba(0,0,0,0.2);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 30px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="icon">✅</div>
+        <h1>¡Mi App Funciona!</h1>
+        <p>Esta app tiene ícono personalizado y se puede instalar en el celular.</p>
+        
+        <button onclick="probarConexion()">🔗 Probar Conexión Google</button>
+        <button onclick="instalarApp()">📱 Instalar App</button>
+        
+        <div id="resultado" style="margin-top: 20px; min-height: 50px;"></div>
+        
+        <div class="steps">
+            <h3>📋 Para instalar en Android:</h3>
+            <p>1. Abre el menú de Chrome (3 puntos)</p>
+            <p>2. Selecciona "Añadir a pantalla de inicio"</p>
+            <p>3. Confirma y ¡listo!</p>
+        </div>
+    </div>
+    
+    <script>
+        // Aquí irá la conexión con Google Apps Script
+        function probarConexion() {
+            document.getElementById('resultado').innerHTML = 
+                '<p style="color: yellow;">⚠️ Primero configura el Apps Script (siguiente paso)</p>';
+        }
+        
+        function instalarApp() {
+            if ('serviceWorker' in navigator) {
+                // En un futuro podrías añadir Service Worker aquí
+                alert('Para instalar: Usa el menú de Chrome → "Añadir a pantalla de inicio"');
+            } else {
+                alert('Tu navegador soporta instalación. Usa el menú de Chrome.');
+            }
+        }
+        
+        // Mostrar mensaje especial si ya está instalada como app
+        if (window.matchMedia('(display-mode: standalone)').matches) {
+            document.querySelector('h1').innerHTML += ' 📲';
+        }
+    </script>
+</body>
+</html>
