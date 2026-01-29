@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>App de Diego</title>
+    
+    <!-- ÍCONO ESTRELLA - SEGURO -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⭐</text></svg>">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: white;
+            text-align: center;
+        }
+        
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .app-container {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            max-width: 500px;
+            width: 100%;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .icon-star {
+            font-size: 80px;
+            animation: pulse 2s infinite;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px gold;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #ffd700;
+        }
+        
+        p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            opacity: 0.9;
+        }
+        
+        .feature-list {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 25px 0;
+            text-align: left;
+        }
+        
+        .feature-list li {
+            margin: 10px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .feature-list li:before {
+            content: "✅";
+            position: absolute;
+            left: 0;
+        }
+        
+        .install-btn {
+            background: linear-gradient(45deg, #4CAF50, #2E7D32);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-weight: bold;
+            display: inline-block;
+            text-decoration: none;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .install-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+        
+        .url-box {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-family: monospace;
+            word-break: break-all;
+            font-size: 0.9rem;
+        }
+        
+        .status {
+            padding: 10px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-weight: bold;
+        }
+        
+        .status.success {
+            background: rgba(76, 175, 80, 0.3);
+            color: #4CAF50;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <div class="icon-star">⭐</div>
+        <h1>¡APP DE DIEGO!</h1>
+        
+        <div class="status success">
+            ✅ GitHub Pages activo - Ícono personalizado garantizado
+        </div>
+        
+        <p>Una app móvil instalable con diseño moderno y funcionalidades avanzadas.</p>
+        
+        <div class="feature-list">
+            <h3>✨ Características:</h3>
+            <ul>
+                <li>Ícono personalizado (Estrella ⭐)</li>
+                <li>Diseño responsivo</li>
+                <li>Instalable como app nativa</li>
+                <li>Funciona offline</li>
+                <li>Animaciones modernas</li>
+            </ul>
+        </div>
+        
+        <button class="install-btn" onclick="instalarApp()">
+            📲 INSTALAR APP EN MI CELULAR
+        </button>
+        
+        <div class="url-box">
+            <strong>URL de tu app:</strong><br>
+            https://diegohidalgovasquez.github.io/mi-app-movil/
+        </div>
+        
+        <p style="font-size: 0.9rem; opacity: 0.7;">
+            Para instalar: Usa Chrome → Menú (3 puntos) → "Añadir a pantalla de inicio"
+        </p>
+    </div>
+    
+    <script>
+        function instalarApp() {
+            if (window.matchMedia('(display-mode: standalone)').matches) {
+                alert('🎉 ¡Ya está instalada como app!');
+            } else if (navigator.standalone) {
+                alert('✅ App instalada correctamente');
+            } else {
+                // Mostrar instrucciones para instalar
+                alert('📱 Para instalar:\n\n1. Toca el menú de Chrome (⋯)\n2. Selecciona "Añadir a pantalla de inicio"\n3. Confirma y ¡listo!\n\nAparecerá con ícono de estrella ⭐ en tu pantalla principal.');
+                
+                // Registrar evento de instalación
+                if ('serviceWorker' in navigator) {
+                    navigator.serviceWorker.register('/sw.js')
+                        .then(() => console.log('Service Worker registrado'))
+                        .catch(err => console.log('SW error:', err));
+                }
+            }
+        }
+        
+        // Detectar si ya está instalada como PWA
+        window.addEventListener('load', () => {
+            const isStandalone = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone;
+            
+            if (isStandalone) {
+                document.querySelector('h1').innerHTML = '¡APP DE DIEGO! 📱';
+                document.querySelector('.status').innerHTML = '✅ App instalada y funcionando';
+            }
+            
+            // Mostrar info de usuario
+            console.log('App cargada correctamente');
+            console.log('User Agent:', navigator.userAgent);
+        });
+    </script>
+</body>
+</html>
